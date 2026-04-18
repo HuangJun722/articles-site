@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章站</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #333; line-height: 1.6; }
+        .container { max-width: 720px; margin: 0 auto; padding: 24px 16px; }
+        h1 { font-size: 1.8rem; margin-bottom: 24px; color: #1a1a1a; }
+        .tag-filter { margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag-btn { padding: 4px 12px; border: 1px solid #ddd; border-radius: 16px; background: white; cursor: pointer; font-size: 0.85rem; color: #666; transition: all 0.2s; }
+        .tag-btn:hover { border-color: #1a1a1a; color: #1a1a1a; }
+        .tag-btn.active { background: #1a1a1a; color: white; border-color: #1a1a1a; }
+        .card { background: white; border-radius: 8px; padding: 20px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); transition: box-shadow 0.2s; }
+        .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+        .card h2 { font-size: 1.1rem; margin-bottom: 8px; }
+        .card h2 a { color: #1a1a1a; text-decoration: none; }
+        .card h2 a:hover { color: #0066cc; }
+        .card-meta { font-size: 0.8rem; color: #999; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .tag { background: #e8f0fe; color: #1a73e8; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; }
+        .footer { text-align: center; margin-top: 40px; font-size: 0.8rem; color: #bbb; }
+        @media (max-width: 480px) { .container { padding: 16px 12px; } h1 { font-size: 1.5rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>文章站</h1>
+
+        <div class="article-list">
+
+        </div>
+        <div class="footer">自动构建 · 最后更新: 2026-04-18 22:51</div>
+    </div>
+    <script>
+    // Tag filter
+    document.querySelectorAll('.tag-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const tag = btn.dataset.tag;
+            document.querySelectorAll('.card').forEach(card => {
+                card.style.display = (!tag || tag === 'all' || card.dataset.tags.includes(tag)) ? '' : 'none';
+            });
+        });
+    });
+    </script>
+</body>
+</html>
