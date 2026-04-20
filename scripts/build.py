@@ -157,8 +157,16 @@ def scan_articles() -> list[dict]:
     return articles
 
 
+def read_existing_index() -> str | None:
+    """Read existing manually maintained index.html if it exists."""
+    index_path = Path("index.html")
+    if index_path.exists():
+        return index_path.read_text(encoding='utf-8')
+    return None
+
+
 def build_index(articles: list[dict]) -> str:
-    """Build the main index.html page."""
+    """Build the main index.html page (fallback if no manual index exists)."""
     tag_filter_html = ""
     # Collect all tags
     all_tags = set()
@@ -340,10 +348,13 @@ tags: ["教程"]
     articles = scan_articles()
     print(f"Found {len(articles)} articles")
 
-    # Build index
-    index_html = build_index(articles)
-    Path(OUTPUT_HTML).write_text(index_html, encoding='utf-8')
-    print(f"Built {OUTPUT_HTML}")
+    # Build index - only if no manually maintained index.html exists
+    if read_existing_index() is None:
+        index_html = build_index(articles)
+        Path(OUTPUT_HTML).write_text(index_html, encoding='utf-8')
+        print(f"Built {OUTPUT_HTML} (auto-generated)")
+    else:
+        print(f"Skipped index.html (manually maintained)")
 
     # Build each article
     for a in articles:
