@@ -7,6 +7,7 @@ on:
       - 'articles/**'
       - 'scripts/**'
       - '.github/workflows/**'
+      - 'index.html'
   workflow_dispatch:
 
 jobs:
