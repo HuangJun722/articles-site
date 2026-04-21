@@ -160,8 +160,13 @@ def scan_articles() -> list[dict]:
 def read_existing_index() -> str | None:
     """Read existing manually maintained index.html if it exists."""
     index_path = Path("index.html")
-    if index_path.exists():
-        return index_path.read_text(encoding='utf-8')
+    if not index_path.exists():
+        return None
+    content = index_path.read_text(encoding='utf-8')
+    # 如果首页有手动维护的特征（CSS变量、特殊标题、品牌内容），认为是手动维护的
+    # 不应该被自动生成的内容覆盖
+    if '全球互联网百晓生' in content or ('var(--bg)' in content and 'var(--panel)' in content):
+        return content
     return None
 
 
