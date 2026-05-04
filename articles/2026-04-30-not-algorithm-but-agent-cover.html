@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>封面</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand-blue: #155494;
+    --brand-blue-dark: #0E4582;
+    --brand-blue-light: #1A5090;
+    --bg-deep: #0B2B4A;
+    --bg-mid: #133C6B;
+    --bg-light: #1A4F88;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 30px 20px 80px;
+    font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  }
+  .cover {
+    width: 900px; height: 383px;
+    position: relative; overflow: hidden;
+    border-radius: 10px; margin-bottom: 40px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  }
+  .bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(145deg, var(--bg-deep) 0%, var(--bg-mid) 45%, var(--bg-light) 100%);
+  }
+  .bg::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 25% 35%, rgba(21,84,148,0.4) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 70%, rgba(10,43,74,0.5) 0%, transparent 55%);
+  }
+  .bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 55px 55px;
+  }
+  .content {
+    position: relative; z-index: 2; inset: 0;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    padding: 48px;
+  }
+  .brand {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 11px; font-weight: 400;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 7px;
+    margin-bottom: 26px;
+    text-transform: uppercase;
+  }
+  .title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 48px; font-weight: 900;
+    color: #FFFFFF;
+    letter-spacing: 6px;
+    margin-bottom: 12px;
+    text-shadow: 0 0 50px rgba(21,84,148,0.4), 0 2px 6px rgba(0,0,0,0.4);
+    text-align: center;
+  }
+  .subtitle {
+    font-size: 18px; font-weight: 300;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+  }
+  .divider {
+    width: 44px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--brand-blue-light), transparent);
+    border-radius: 1px; margin-bottom: 26px;
+  }
+  .keywords {
+    display: flex; gap: 12px;
+  }
+  .keyword {
+    padding: 6px 16px;
+    background: rgba(21,84,148,0.18);
+    border: 1px solid rgba(21,84,148,0.35);
+    border-radius: 22px;
+    font-size: 12px;
+    color: rgba(180,215,255,0.85);
+    letter-spacing: 1px;
+  }
+  .corner {
+    position: absolute; width: 100px; height: 100px;
+    pointer-events: none;
+  }
+  .corner-tl { top: 0; left: 0; border-top: 1px solid rgba(21,84,148,0.5); border-left: 1px solid rgba(21,84,148,0.5); }
+  .corner-tr { top: 0; right: 0; border-top: 1px solid rgba(21,84,148,0.5); border-right: 1px solid rgba(21,84,148,0.5); }
+  .corner-bl { bottom: 0; left: 0; border-bottom: 1px solid rgba(21,84,148,0.3); border-left: 1px solid rgba(21,84,148,0.3); }
+  .corner-br { bottom: 0; right: 0; border-bottom: 1px solid rgba(21,84,148,0.3); border-right: 1px solid rgba(21,84,148,0.3); }
+  .toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,10,15,0.95); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 12px 20px; display: flex; align-items: center;
+    justify-content: center; gap: 12px;
+  }
+  .toolbar .btn {
+    background: var(--bg-mid); color: #FFF; border: 1px solid rgba(21,84,148,0.3);
+    padding: 10px 24px; border-radius: 8px; font-size: 14px;
+    font-weight: 500; cursor: pointer; transition: all 0.2s;
+  }
+  .toolbar .btn:hover { background: var(--bg-light); }
+  .toolbar .btn.accent { background: var(--brand-blue); border-color: var(--brand-blue); }
+  .toolbar .btn.accent:hover { background: var(--brand-blue-light); }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn accent" onclick="downloadCover()">下载封面 PNG</button>
+</div>
+
+<div class="cover">
+  <div class="bg"></div>
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+  <div class="content">
+    <div class="brand">智界连线</div>
+    <div class="title">广告业最危险的颠覆者<br>不是算法，而是Agent</div>
+    <div class="subtitle"></div>
+    <div class="divider"></div>
+    <div class="keywords">
+      <span class="keyword">AI广告</span>
+      <span class="keyword">Agent</span>
+      <span class="keyword">流量分发</span>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script>
+async function downloadCover() {
+  const cover = document.querySelector('.cover');
+  const canvas = await html2canvas(cover, { scale: 2, useCORS: true, backgroundColor: '#0B2B4A' });
+  canvas.toBlob(blob => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = '封面.png';
+    a.click(); URL.revokeObjectURL(url);
+  });
+}
+</script>
+</body>
+</html>
